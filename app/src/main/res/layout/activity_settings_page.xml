@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <!-- Geri butonu: Boyut 48dp'ye çıkarılarak Touch Target hatası giderildi -->
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:padding="12dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/arrow_back_icon"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Geri dön"
+        app:tint="#1B263B"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Başlık -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Ayarlar"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#1B263B"
+        app:layout_constraintStart_toEndOf="@id/btnBack"
+        app:layout_constraintTop_toTopOf="@id/btnBack"
+        app:layout_constraintBottom_toBottomOf="@id/btnBack" />
+
+    <!-- Kaydırılabilir içerik -->
+    <ScrollView
+        android:id="@+id/scrollSettings"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@id/btnBack"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingBottom="24dp">
+
+            <!-- GENEL -->
+            <TextView
+                style="@style/SettingsSectionLabel"
+                android:text="GENEL"
+                android:layout_marginTop="16dp" />
+
+            <!-- Dil -->
+            <LinearLayout
+                android:id="@+id/rowLanguage"
+                style="@style/SettingsRow">
+
+                <FrameLayout style="@style/SettingsIconBox">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/globe_icon"
+                        android:contentDescription="Dil simgesi"
+                        app:tint="#1B263B" />
+                </FrameLayout>
+
+                <TextView
+                    style="@style/SettingsRowLabel"
+                    android:text="Dil" />
+
+                <TextView
+                    android:id="@+id/tvLanguageValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Türkçe"
+                    android:textSize="14sp"
+                    android:textColor="#415A77" />
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/chevron_right_icon"
+                    android:contentDescription="Detay"
+                    app:tint="#415A77" />
+            </LinearLayout>
+
+            <!-- Bildirimler -->
+            <LinearLayout style="@style/SettingsRow">
+                <FrameLayout style="@style/SettingsIconBox">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/bell_icon"
+                        android:contentDescription="Bildirim simgesi"
+                        app:tint="#1B263B" />
+                </FrameLayout>
+
+                <TextView
+                    style="@style/SettingsRowLabel"
+                    android:text="Bildirimler" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/swNotifications"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:contentDescription="Bildirimleri aç veya kapat"
+                    app:thumbTint="#FFFFFF"
+                    app:trackTint="@color/track_selector" />
+            </LinearLayout>
+
+            <!-- Karanlık Mod -->
+            <LinearLayout style="@style/SettingsRow">
+                <FrameLayout style="@style/SettingsIconBox">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/moon_icon"
+                        android:contentDescription="Karanlık mod simgesi"
+                        app:tint="#1B263B" />
+                </FrameLayout>
+
+                <TextView
+                    style="@style/SettingsRowLabel"
+                    android:text="Karanlık Mod" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/swDarkMode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Karanlık modu aç veya kapat"
+                    app:thumbTint="#FFFFFF"
+                    app:trackTint="@color/track_selector" />
+            </LinearLayout>
+
+            <!-- GİZLİLİK -->
+            <TextView
+                style="@style/SettingsSectionLabel"
+                android:text="GİZLİLİK"
+                android:layout_marginTop="24dp" />
+
+            <!-- Uygulama Kilidi -->
+            <LinearLayout style="@style/SettingsRow">
+                <FrameLayout style="@style/SettingsIconBox">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/lock_icon"
+                        android:contentDescription="Kilit simgesi"
+                        app:tint="#1B263B" />
+                </FrameLayout>
+
+                <TextView
+                    style="@style/SettingsRowLabel"
+                    android:text="Uygulama Kilidi" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/swAppLock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Uygulama kilidini yönet"
+                    app:thumbTint="#FFFFFF"
+                    app:trackTint="@color/track_selector" />
+            </LinearLayout>
+
+            <!-- HAKKINDA -->
+            <TextView
+                style="@style/SettingsSectionLabel"
+                android:text="HAKKINDA"
+                android:layout_marginTop="24dp" />
+
+            <LinearLayout
+                android:id="@+id/rowAbout"
+                style="@style/SettingsRow">
+
+                <FrameLayout style="@style/SettingsIconBox">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/info_icon"
+                        android:contentDescription="Bilgi simgesi"
+                        app:tint="#1B263B" />
+                </FrameLayout>
+
+                <TextView
+                    style="@style/SettingsRowLabel"
+                    android:text="Uygulama Hakkında" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="v1.0.0"
+                    android:textSize="13sp"
+                    android:textColor="#415A77" />
+            </LinearLayout>
+
+            <!-- Çıkış Yap butonu: Genişlik ve boşluklar optimize edildi -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="40dp"
+                android:text="Çıkış Yap"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                android:backgroundTint="#1B263B"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                app:cornerRadius="16dp"
+                app:icon="@drawable/logout_icon"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:iconSize="20dp"
+                app:iconTint="#FFFFFF"
+                app:rippleColor="#406998C5" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
