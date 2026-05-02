@@ -3,20 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
-    <!-- Geri butonu: Boyut 48dp'ye çıkarıldı -->
-
-    <!-- Düzenle butonu: En sağda -->
-
-    <!-- Favori butonu: Düzenle'nin solunda -->
-
-    <!-- Tarih: Geri ile Favori arasında tam ortalı -->
-
-    <!-- Başlık -->
-
+    <!-- Tarih -->
     <TextView
         android:id="@+id/tvDate"
         android:layout_width="0dp"
@@ -31,6 +23,7 @@
         app:layout_constraintStart_toEndOf="@id/btnBack"
         app:layout_constraintTop_toTopOf="@id/btnBack" />
 
+    <!-- Favori butonu -->
     <ImageButton
         android:id="@+id/btnFavorite"
         android:layout_width="48dp"
@@ -46,6 +39,7 @@
         app:layout_constraintTop_toTopOf="@id/btnEdit"
         app:tint="#415A77" />
 
+    <!-- Düzenle butonu -->
     <ImageButton
         android:id="@+id/btnEdit"
         android:layout_width="48dp"
@@ -61,6 +55,7 @@
         app:layout_constraintTop_toTopOf="@id/btnBack"
         app:tint="#FFFFFF" />
 
+    <!-- Geri butonu -->
     <ImageButton
         android:id="@+id/btnBack"
         android:layout_width="48dp"
@@ -76,6 +71,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tint="#1B263B" />
 
+    <!-- Başlık -->
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="0dp"
