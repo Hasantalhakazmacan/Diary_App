@@ -26,7 +26,7 @@ class SettingsPage : AppCompatActivity() {
 
         val prefs = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
 
-        // Karanlık Mod
+
         val swDarkMode = findViewById<SwitchMaterial>(R.id.swDarkMode)
         swDarkMode.isChecked = prefs.getBoolean("dark_mode", false)
         swDarkMode.setOnCheckedChangeListener { _, checked ->
@@ -37,21 +37,21 @@ class SettingsPage : AppCompatActivity() {
             )
         }
 
-        // Bildirimler
+
         val swNotifications = findViewById<SwitchMaterial>(R.id.swNotifications)
         swNotifications.isChecked = prefs.getBoolean("notifications", true)
         swNotifications.setOnCheckedChangeListener { _, checked ->
             prefs.edit().putBoolean("notifications", checked).apply()
         }
 
-        // Uygulama Kilidi
+
         val swAppLock = findViewById<SwitchMaterial>(R.id.swAppLock)
         swAppLock.isChecked = prefs.getBoolean("app_lock", false)
         swAppLock.setOnCheckedChangeListener { _, checked ->
             prefs.edit().putBoolean("app_lock", checked).apply()
         }
 
-        // Geri butonu
+
         val btnBack = findViewById<ImageButton>(R.id.btnBack)
         btnBack.setOnClickListener {
             val intent = Intent(this, MainPage::class.java)
@@ -59,7 +59,7 @@ class SettingsPage : AppCompatActivity() {
             finish()
         }
 
-        // Çıkış Yap butonu — "Beni Hatırla" tercihini de temizler
+
         val btnLogout = findViewById<MaterialButton>(R.id.btnLogout)
         btnLogout.setOnClickListener {
             // Oturum bilgilerini sıfırla

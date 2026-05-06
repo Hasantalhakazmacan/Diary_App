@@ -18,12 +18,12 @@ class RegisterActivity : AppCompatActivity() {
 
         dbHelper = DatabaseHelper(this)
 
-        // Kayıt Ol Butonu
+
         binding.appCompatButton.setOnClickListener {
             performRegister()
         }
 
-        // Giriş Yap Butonu - LoginActivity'ye Yönlendirme
+
         binding.btnGoToLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
@@ -36,31 +36,31 @@ class RegisterActivity : AppCompatActivity() {
         val email = binding.editTextEmail.text.toString().trim()
         val password = binding.editText2.text.toString().trim()
 
-        // Alanların boş olup olmadığını kontrol et
+
         if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Lütfen tüm alanları doldurun", Toast.LENGTH_SHORT).show()
             return
         }
 
-        // E-mail formatı kontrolü
+
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             Toast.makeText(this, "Geçerli bir e-mail adresi girin", Toast.LENGTH_SHORT).show()
             return
         }
 
-        // Şifre uzunluğu kontrolü
+
         if (password.length < 4) {
             Toast.makeText(this, "Şifre en az 4 karakter olmalı", Toast.LENGTH_SHORT).show()
             return
         }
 
-        // E-mail zaten kayıtlı mı?
+
         if (dbHelper.isEmailRegistered(email)) {
             Toast.makeText(this, "Bu e-mail ile zaten bir hesap var", Toast.LENGTH_LONG).show()
             return
         }
 
-        // Kullanıcıyı ekle
+
         val result = dbHelper.insertUser(username, email, password)
 
         if (result != -1L) {

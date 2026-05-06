@@ -43,8 +43,6 @@ class DiaryPage : AppCompatActivity() {
 
         val dateFormat = SimpleDateFormat("dd MMMM yyyy", Locale("tr", "TR"))
         tvDate.text = dateFormat.format(Date())
-
-        // Düzenleme modu — MainPage'den note_id geldiyse DB'den notu yükle
         noteId = intent.getIntExtra("note_id", -1)
         if (noteId != -1) {
             val note = dbHelper.getNoteById(noteId)
@@ -55,7 +53,6 @@ class DiaryPage : AppCompatActivity() {
                 isFavorite = note.isFavorite
             }
         } else {
-            // Eski Intent extra desteğiyle uyumluluk
             intent.getStringExtra("EXTRA_TITLE")?.let { etTitle.setText(it) }
             intent.getStringExtra("EXTRA_CONTENT")?.let { etContent.setText(it) }
             intent.getStringExtra("EXTRA_DATE")?.let { tvDate.text = it }
@@ -64,12 +61,10 @@ class DiaryPage : AppCompatActivity() {
 
         updateFavoriteIcon(btnFavorite)
 
-        // GERİ
         btnBack.setOnClickListener {
             finish()
         }
 
-        // KAYDET — DB'ye yaz, sonra görüntüleme sayfasına geç
         btnSave.setOnClickListener {
             val titleText = etTitle.text.toString().trim()
             val contentText = etContent.text.toString().trim()
@@ -98,7 +93,7 @@ class DiaryPage : AppCompatActivity() {
 
             Toast.makeText(this, "Kaydedildi", Toast.LENGTH_SHORT).show()
 
-            // ViewsPage'e geçiş
+
             val viewIntent = Intent(this, ViewsPage::class.java)
             viewIntent.putExtra("note_id", savedId)
             viewIntent.putExtra("EXTRA_TITLE", titleText)
@@ -109,7 +104,7 @@ class DiaryPage : AppCompatActivity() {
             finish()
         }
 
-        // SİL — sadece düzenleme modunda anlamlı
+
         btnDelete.setOnClickListener {
             if (noteId != -1) {
                 dbHelper.deleteNote(noteId)
@@ -118,7 +113,7 @@ class DiaryPage : AppCompatActivity() {
             finish()
         }
 
-        // FAVORİ
+
         btnFavorite.setOnClickListener {
             isFavorite = !isFavorite
             updateFavoriteIcon(btnFavorite)

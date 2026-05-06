@@ -36,7 +36,7 @@ class MainPage : AppCompatActivity() {
 
         dbHelper = DatabaseHelper(this)
 
-        // XML'deki butonları id'leri ile buluyoruz
+
         val btnSettings = findViewById<ImageButton>(R.id.btnSettings)
         val btnSearch = findViewById<ImageButton>(R.id.btnSearch)
         val fabAdd = findViewById<FloatingActionButton>(R.id.fabAdd)
@@ -44,27 +44,27 @@ class MainPage : AppCompatActivity() {
         searchBar = findViewById(R.id.searchBar)
         etSearch = findViewById(R.id.etSearch)
 
-        // RecyclerView ayarları
+
         rvNotes.layoutManager = LinearLayoutManager(this)
         adapter = NoteAdapter(emptyList()) { note ->
-            // Karta tıklanınca DiaryPage düzenleme modunda açılır
+
             val intent = Intent(this, DiaryPage::class.java)
             intent.putExtra("note_id", note.id)
             startActivity(intent)
         }
         rvNotes.adapter = adapter
 
-        // Ayarlar butonu
+
         btnSettings.setOnClickListener {
             startActivity(Intent(this, SettingsPage::class.java))
         }
 
-        // Yeni günlük (FAB)
+
         fabAdd.setOnClickListener {
             startActivity(Intent(this, DiaryPage::class.java))
         }
 
-        // Arama butonu — arama çubuğunu aç/kapat
+
         btnSearch.setOnClickListener {
             if (searchBar.visibility == View.VISIBLE) {
                 searchBar.visibility = View.GONE
@@ -76,7 +76,7 @@ class MainPage : AppCompatActivity() {
             }
         }
 
-        // Arama yazısı değiştikçe filtrele
+
         etSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -90,7 +90,7 @@ class MainPage : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        // Sayfaya her dönüldüğünde listeyi yenile
+
         refreshList()
     }
 

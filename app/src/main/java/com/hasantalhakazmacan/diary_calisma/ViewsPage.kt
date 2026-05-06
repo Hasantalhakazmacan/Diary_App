@@ -22,7 +22,7 @@ class ViewsPage : AppCompatActivity() {
             insets
         }
 
-        // Bileşenleri tanımlıyoruz
+
         val btnEdit = findViewById<ImageButton>(R.id.btnEdit)
         val tvTitle = findViewById<TextView>(R.id.tvTitle)
         val tvContent = findViewById<TextView>(R.id.tvContent)
@@ -30,13 +30,13 @@ class ViewsPage : AppCompatActivity() {
         val btnFavorite = findViewById<ImageButton>(R.id.btnFavorite)
         val btnBack = findViewById<ImageButton>(R.id.btnBack) // Geri butonu tanımlandı
 
-        // Intent verilerini alıyoruz
+
         val incomingTitle = intent.getStringExtra("EXTRA_TITLE")
         val incomingContent = intent.getStringExtra("EXTRA_CONTENT")
         val incomingDate = intent.getStringExtra("EXTRA_DATE")
         val incomingFavoriteStatus = intent.getBooleanExtra("EXTRA_IS_FAVORITE", false)
 
-        // Verileri yansıtıyoruz
+
         if (incomingTitle != null) tvTitle.text = incomingTitle
         if (incomingContent != null) tvContent.text = incomingContent
         if (incomingDate != null) tvDate.text = incomingDate
@@ -47,11 +47,11 @@ class ViewsPage : AppCompatActivity() {
             btnFavorite.setImageResource(R.drawable.heart_icon)
         }
 
-        // --- GERİ BUTONU YÖNLENDİRMESİ ---
+
         btnBack.setOnClickListener {
             val intent = Intent(this, MainPage::class.java)
             startActivity(intent)
-            finish() // Bu sayfayı kapatır
+            finish()
         }
 
         btnEdit.setOnClickListener {
@@ -59,8 +59,7 @@ class ViewsPage : AppCompatActivity() {
             val currentContent = tvContent.text.toString()
             val currentIDate = tvDate.text.toString()
 
-            // Mevcut favori durumunu kontrol et (Tag veya değişken üzerinden)
-            // Eğer bir değişkende tutmuyorsan, o anki ikonun ne olduğuna bakabiliriz
+
             val intent = Intent(this, DiaryPage::class.java)
 
             intent.putExtra("EXTRA_TITLE", currentTitle)

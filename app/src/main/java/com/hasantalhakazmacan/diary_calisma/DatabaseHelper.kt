@@ -50,8 +50,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db?.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS)
         onCreate(db)
     }
-
-    // Email zaten kayıtlı mı?
     fun isEmailRegistered(email: String): Boolean {
         val cursor = readableDatabase.rawQuery(
             "SELECT $COLUMN_ID FROM $TABLE_USERS WHERE $COLUMN_EMAIL = ?",
@@ -61,8 +59,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         cursor.close()
         return exists
     }
-
-    // Yeni kullanıcı ekle (email benzersizse)
     fun insertUser(username: String, email: String, password: String): Long {
         if (isEmailRegistered(email)) return -1L
         val values = ContentValues().apply {
@@ -72,8 +68,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         }
         return writableDatabase.insert(TABLE_USERS, null, values)
     }
-
-    // Giriş kontrolü
     fun checkLogin(email: String, password: String): Boolean {
         val cursor = readableDatabase.rawQuery(
             "SELECT $COLUMN_ID FROM $TABLE_USERS WHERE $COLUMN_EMAIL = ? AND $COLUMN_PASSWORD = ?",
@@ -83,8 +77,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         cursor.close()
         return ok
     }
-
-    // Yeni not ekle
     fun insertNote(title: String, content: String, date: String): Long {
         val values = ContentValues().apply {
             put(COL_NOTE_TITLE, title)
@@ -94,8 +86,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         }
         return writableDatabase.insert(TABLE_NOTES, null, values)
     }
-
-    // Mevcut notu güncelle
     fun updateNote(id: Int, title: String, content: String, date: String): Int {
         val values = ContentValues().apply {
             put(COL_NOTE_TITLE, title)
@@ -107,16 +97,12 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             "$COL_NOTE_ID = ?", arrayOf(id.toString())
         )
     }
-
-    // Not sil
     fun deleteNote(id: Int): Int {
         return writableDatabase.delete(
             TABLE_NOTES,
             "$COL_NOTE_ID = ?", arrayOf(id.toString())
         )
     }
-
-    // Favori durumunu değiştir
     fun setFavorite(id: Int, isFav: Boolean): Int {
         val values = ContentValues().apply {
             put(COL_NOTE_FAV, if (isFav) 1 else 0)
@@ -126,8 +112,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             "$COL_NOTE_ID = ?", arrayOf(id.toString())
         )
     }
-
-    // Tek bir notu getir
     fun getNoteById(id: Int): Note? {
         val cursor = readableDatabase.rawQuery(
             "SELECT $COL_NOTE_ID, $COL_NOTE_TITLE, $COL_NOTE_CONTENT, " +
@@ -148,8 +132,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         }
         return null
     }
-
-    // Tüm notları (en yeni üstte) getir
     fun getAllNotes(): List<Note> {
         val list = mutableListOf<Note>()
         val cursor = readableDatabase.rawQuery(

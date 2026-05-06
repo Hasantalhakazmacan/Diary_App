@@ -30,19 +30,19 @@ class LoginActivity : AppCompatActivity() {
         dbHelper = DatabaseHelper(this)
         val prefs = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
 
-        // XML bileşenleri
+
         val btnKayit = findViewById<Button>(R.id.btnKayitOl)
         val btnGirisYap = findViewById<Button>(R.id.appCompatButton)
         val etUsername = findViewById<EditText>(R.id.editText)
         val etPassword = findViewById<EditText>(R.id.editText2)
         val cbRememberMe = findViewById<CheckBox>(R.id.checkBox)
 
-        // Kayıt Ol sayfasına yönlendirme
+
         btnKayit.setOnClickListener {
             startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
         }
 
-        // Giriş Yap butonu
+
         btnGirisYap.setOnClickListener {
             val girilenKullaniciAdi = etUsername.text.toString().trim()
             val girilenSifre = etPassword.text.toString().trim()
