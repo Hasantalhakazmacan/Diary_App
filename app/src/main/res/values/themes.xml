@@ -1,12 +1,36 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.Diary_calisma" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="android:windowBackground">#FFFFFF</item>
-        <item name="android:statusBarColor">#FFFFFF</item>
+    <style name="Base.Theme.GunlukApp" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Renkler -->
+        <item name="appOuterBg">@color/light_outerBg</item>
+        <item name="appSurface">@color/light_surface</item>
+        <item name="appSurfaceMuted">@color/light_surfaceMuted</item>
+        <item name="appTextPrimary">@color/light_textPrimary</item>
+        <item name="appTextMuted">@color/light_textMuted</item>
+        <item name="appAccent">@color/light_accent</item>
+        <item name="appAccentText">@color/light_accentText</item>
+        <item name="appIconMuted">@color/light_iconMuted</item>
+        <item name="appCardBg">@color/light_cardBg</item>
+        <item name="appCardBorder">@color/light_cardBorder</item>
+        <item name="appDivider">@color/light_divider</item>
+        <item name="appFrameBorder">@color/light_frameBorder</item>
+        <item name="appHomeIndicator">@color/light_homeIndicator</item>
+        <item name="appAccentGradStart">@color/light_accentGradStart</item>
+        <item name="appAccentGradMid">@color/light_accentGradMid</item>
+        <item name="appAccentGradEnd">@color/light_accentGradEnd</item>
+
+        <!-- Drawable'lar -->
+        <item name="appOuterDrawable">@drawable/bg_outer_light</item>
+        <item name="appSurfaceDrawable">@drawable/bg_surface_light</item>
+        <item name="appCardDrawable">@drawable/bg_note_card_light</item>
+        <item name="appAccentButtonDrawable">@drawable/bg_accent_button_light</item>
+        <item name="appLogoutDrawable">@drawable/bg_logout_light</item>
+
+        <!-- Sistem çubukları -->
+        <item name="android:statusBarColor">@color/light_surface</item>
+        <item name="android:navigationBarColor">@color/light_surface</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
     </style>
 
-    <style name="Theme.Diary_calisma" parent="Base.Theme.Diary_calisma" />
-
+    <style name="Theme.GunlukApp" parent="Base.Theme.GunlukApp" />
 </resources>

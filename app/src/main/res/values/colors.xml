@@ -1,5 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Açık tema -->
+    <color name="light_outerBg">#1B263B</color>
+    <color name="light_surface">#FFFFFF</color>
+    <color name="light_surfaceMuted">#F5F8FC</color>
+    <color name="light_textPrimary">#1B263B</color>
+    <color name="light_textMuted">#415A77</color>
+    <color name="light_accent">#6998C5</color>
+    <color name="light_accentText">#FFFFFF</color>
+    <color name="light_iconMuted">#415A77</color>
+    <color name="light_cardBg">#106998C5</color>
+    <color name="light_cardBorder">#406998C5</color>
+    <color name="light_divider">#336998C5</color>
+    <color name="light_frameBorder">#1B263B</color>
+    <color name="light_homeIndicator">#1B263B</color>
+    <color name="light_accentGradStart">#8AB6E0</color>
+    <color name="light_accentGradMid">#6998C5</color>
+    <color name="light_accentGradEnd">#415A77</color>
+
+    <!-- Karanlık tema -->
+    <color name="dark_outerBg">#02060F</color>
+    <color name="dark_surface">#0B1628</color>
+    <color name="dark_surfaceMuted">#1A2A45</color>
+    <color name="dark_textPrimary">#F1F5FB</color>
+    <color name="dark_textMuted">#A9B7CC</color>  <!-- A9B7CC  -->
+    <color name="dark_accent">#7FB0DC</color>
+    <color name="dark_accentText">#02060F</color>
+    <color name="dark_iconMuted">#A9B7CC</color>
+    <color name="dark_cardBg">#1A2A45</color>
+    <color name="dark_cardBorder">#706998C5</color>
+    <color name="dark_divider">#356998C5</color>
+    <color name="dark_frameBorder">#0A1220</color>
+    <color name="dark_homeIndicator">#F1F5FB</color>
+    <color name="dark_accentGradStart">#A5D8FF</color>
+    <color name="dark_accentGradMid">#6998C5</color>
+    <color name="dark_accentGradEnd">#7B57FF</color>
 </resources>

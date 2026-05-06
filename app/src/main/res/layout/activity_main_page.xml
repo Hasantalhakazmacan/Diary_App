@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="?attr/appSurface">
 
     <!-- Başlık -->
     <TextView
@@ -15,13 +15,13 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:text="Günlüklerim"
-        android:textColor="#1B263B"
+        android:textColor="?attr/appTextPrimary"
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Ayarlar butonu: Boyut 48dp yapıldı -->
+    <!-- Ayarlar butonu -->
     <ImageButton
         android:id="@+id/btnSettings"
         android:layout_width="48dp"
@@ -35,9 +35,9 @@
         app:layout_constraintBottom_toBottomOf="@id/tvTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tvTitle"
-        app:tint="#1B263B" />
+        app:tint="?attr/appTextPrimary" />
 
-    <!-- Arama butonu: Boyut 48dp yapıldı -->
+    <!-- Arama butonu -->
     <ImageButton
         android:id="@+id/btnSearch"
         android:layout_width="48dp"
@@ -51,7 +51,7 @@
         app:layout_constraintBottom_toBottomOf="@id/btnSettings"
         app:layout_constraintEnd_toStartOf="@id/btnSettings"
         app:layout_constraintTop_toTopOf="@id/btnSettings"
-        app:tint="#1B263B" />
+        app:tint="?attr/appTextPrimary" />
 
     <!-- Arama alanı -->
     <LinearLayout
@@ -78,7 +78,7 @@
             android:layout_height="20dp"
             android:contentDescription="Arama İkonu"
             android:src="@drawable/search_icon"
-            app:tint="#415A77" />
+            app:tint="?attr/appIconMuted" />
 
         <EditText
             android:id="@+id/etSearch"
@@ -92,8 +92,8 @@
             android:importantForAutofill="no"
             android:imeOptions="actionSearch"
             android:inputType="text"
-            android:textColor="#1B263B"
-            android:textColorHint="#80415A77"
+            android:textColor="?attr/appTextPrimary"
+            android:textColorHint="?attr/appTextMuted"
             android:textSize="14sp" />
 
     </LinearLayout>
@@ -125,9 +125,9 @@
         android:layout_marginBottom="24dp"
         android:contentDescription="Yeni günlük ekle"
         android:src="@drawable/plus_icon"
-        app:backgroundTint="#6998C5"
+        app:backgroundTint="?attr/appAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:tint="#FFFFFF" />
+        app:tint="?attr/appAccentText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

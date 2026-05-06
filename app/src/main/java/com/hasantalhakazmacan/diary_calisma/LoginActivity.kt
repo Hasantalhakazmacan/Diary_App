@@ -1,8 +1,10 @@
 package com.hasantalhakazmacan.diary_calisma
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -12,7 +14,7 @@ import androidx.core.view.WindowInsetsCompat
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var dbHelper: DatabaseHelper // Veritabanı yardımcısı
+    private lateinit var dbHelper: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,60 +27,56 @@ class LoginActivity : AppCompatActivity() {
             insets
         }
 
-        // Veritabanı sınıfımızı başlatıyoruz
         dbHelper = DatabaseHelper(this)
+        val prefs = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
 
-        // XML'deki bileşenleri buluyoruz
+        // XML bileşenleri
         val btnKayit = findViewById<Button>(R.id.btnKayitOl)
         val btnGirisYap = findViewById<Button>(R.id.appCompatButton)
         val etUsername = findViewById<EditText>(R.id.editText)
         val etPassword = findViewById<EditText>(R.id.editText2)
+        val cbRememberMe = findViewById<CheckBox>(R.id.checkBox)
 
         // Kayıt Ol sayfasına yönlendirme
         btnKayit.setOnClickListener {
-            val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
         }
 
-        // Giriş Yap butonuna tıklandığında çalışacak kodlar
+        // Giriş Yap butonu
         btnGirisYap.setOnClickListener {
             val girilenKullaniciAdi = etUsername.text.toString().trim()
             val girilenSifre = etPassword.text.toString().trim()
+            val rememberMe = cbRememberMe.isChecked
 
-            // 1. Durum: Alanlar boş mu kontrolü
             if (girilenKullaniciAdi.isEmpty() || girilenSifre.isEmpty()) {
                 Toast.makeText(this, "Lütfen tüm alanları doldurun!", Toast.LENGTH_SHORT).show()
-            } else {
-                // Veritabanını "Okunabilir" modda açıyoruz
-                val db = dbHelper.readableDatabase
-
-                // Veritabanında bu kullanıcı adı ve şifreye sahip bir kayıt var mı sorgusu
-                val query = "SELECT * FROM ${DatabaseHelper.TABLE_USERS} WHERE " +
-                        "${DatabaseHelper.COLUMN_USERNAME} = ? AND " +
-                        "${DatabaseHelper.COLUMN_PASSWORD} = ?"
-
-                val selectionArgs = arrayOf(girilenKullaniciAdi, girilenSifre)
-                val cursor = db.rawQuery(query, selectionArgs)
-
-                // Eğer cursor.count 0'dan büyükse, eşleşen bir kayıt bulunmuş demektir
-                if (cursor.count > 0) {
-                    Toast.makeText(this, "Giriş Başarılı! Hoşgeldiniz.", Toast.LENGTH_SHORT).show()
-
-                    // Sınıf adını MainPage olarak güncelledik
-                    val intent = Intent(this@LoginActivity, MainPage::class.java)
-                    startActivity(intent)
-
-                    // Kullanıcı giriş yaptıktan sonra telefonun geri tuşuna basıp tekrar Login'e dönmesin diye:
-                    finish()
-                } else {
-                    // Kayıt bulunamadı veya şifre yanlış
-                    Toast.makeText(this, "Kullanıcı adı veya şifre hatalı!", Toast.LENGTH_SHORT).show()
-                }
-
-                // İşlem bitince cursor ve veritabanını kapatıyoruz
-                cursor.close()
-                db.close()
+                return@setOnClickListener
             }
+
+            val db = dbHelper.readableDatabase
+            val query = "SELECT * FROM ${DatabaseHelper.TABLE_USERS} WHERE " +
+                    "${DatabaseHelper.COLUMN_USERNAME} = ? AND " +
+                    "${DatabaseHelper.COLUMN_PASSWORD} = ?"
+            val selectionArgs = arrayOf(girilenKullaniciAdi, girilenSifre)
+            val cursor = db.rawQuery(query, selectionArgs)
+
+            if (cursor.count > 0) {
+                // "Beni Hatırla" tercihini kaydet
+                prefs.edit()
+                    .putBoolean("logged_in", rememberMe)
+                    .putString("user_name", girilenKullaniciAdi)
+                    .apply()
+
+                Toast.makeText(this, "Giriş Başarılı! Hoşgeldiniz.", Toast.LENGTH_SHORT).show()
+
+                startActivity(Intent(this@LoginActivity, MainPage::class.java))
+                finish()
+            } else {
+                Toast.makeText(this, "Kullanıcı adı veya şifre hatalı!", Toast.LENGTH_SHORT).show()
+            }
+
+            cursor.close()
+            db.close()
         }
     }
 }

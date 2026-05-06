@@ -6,9 +6,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="?attr/appSurface">
 
-    <!-- Geri butonu: Boyut 48dp'ye çıkarılarak Touch Target hatası giderildi -->
+    <!-- Geri butonu -->
     <ImageButton
         android:id="@+id/btnBack"
         android:layout_width="48dp"
@@ -20,7 +20,7 @@
         android:src="@drawable/arrow_back_icon"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="Geri dön"
-        app:tint="#1B263B"
+        app:tint="?attr/appTextPrimary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,7 +33,7 @@
         android:text="Ayarlar"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="#1B263B"
+        android:textColor="?attr/appTextPrimary"
         app:layout_constraintStart_toEndOf="@id/btnBack"
         app:layout_constraintTop_toTopOf="@id/btnBack"
         app:layout_constraintBottom_toBottomOf="@id/btnBack" />
@@ -62,6 +62,7 @@
             <TextView
                 style="@style/SettingsSectionLabel"
                 android:text="GENEL"
+                android:textColor="?attr/appTextMuted"
                 android:layout_marginTop="16dp" />
 
             <!-- Dil -->
@@ -76,11 +77,12 @@
                         android:layout_gravity="center"
                         android:src="@drawable/globe_icon"
                         android:contentDescription="Dil simgesi"
-                        app:tint="#1B263B" />
+                        app:tint="?attr/appTextPrimary" />
                 </FrameLayout>
 
                 <TextView
                     style="@style/SettingsRowLabel"
+                    android:textColor="?attr/appTextPrimary"
                     android:text="Dil" />
 
                 <TextView
@@ -89,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:text="Türkçe"
                     android:textSize="14sp"
-                    android:textColor="#415A77" />
+                    android:textColor="?attr/appTextMuted" />
 
                 <ImageView
                     android:layout_width="16dp"
@@ -97,7 +99,7 @@
                     android:layout_marginStart="8dp"
                     android:src="@drawable/chevron_right_icon"
                     android:contentDescription="Detay"
-                    app:tint="#415A77" />
+                    app:tint="?attr/appIconMuted" />
             </LinearLayout>
 
             <!-- Bildirimler -->
@@ -109,11 +111,12 @@
                         android:layout_gravity="center"
                         android:src="@drawable/bell_icon"
                         android:contentDescription="Bildirim simgesi"
-                        app:tint="#1B263B" />
+                        app:tint="?attr/appTextPrimary" />
                 </FrameLayout>
 
                 <TextView
                     style="@style/SettingsRowLabel"
+                    android:textColor="?attr/appTextPrimary"
                     android:text="Bildirimler" />
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
@@ -135,11 +138,12 @@
                         android:layout_gravity="center"
                         android:src="@drawable/moon_icon"
                         android:contentDescription="Karanlık mod simgesi"
-                        app:tint="#1B263B" />
+                        app:tint="?attr/appTextPrimary" />
                 </FrameLayout>
 
                 <TextView
                     style="@style/SettingsRowLabel"
+                    android:textColor="?attr/appTextPrimary"
                     android:text="Karanlık Mod" />
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
@@ -155,6 +159,7 @@
             <TextView
                 style="@style/SettingsSectionLabel"
                 android:text="GİZLİLİK"
+                android:textColor="?attr/appTextMuted"
                 android:layout_marginTop="24dp" />
 
             <!-- Uygulama Kilidi -->
@@ -166,11 +171,12 @@
                         android:layout_gravity="center"
                         android:src="@drawable/lock_icon"
                         android:contentDescription="Kilit simgesi"
-                        app:tint="#1B263B" />
+                        app:tint="?attr/appTextPrimary" />
                 </FrameLayout>
 
                 <TextView
                     style="@style/SettingsRowLabel"
+                    android:textColor="?attr/appTextPrimary"
                     android:text="Uygulama Kilidi" />
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
@@ -186,6 +192,7 @@
             <TextView
                 style="@style/SettingsSectionLabel"
                 android:text="HAKKINDA"
+                android:textColor="?attr/appTextMuted"
                 android:layout_marginTop="24dp" />
 
             <LinearLayout
@@ -199,11 +206,12 @@
                         android:layout_gravity="center"
                         android:src="@drawable/info_icon"
                         android:contentDescription="Bilgi simgesi"
-                        app:tint="#1B263B" />
+                        app:tint="?attr/appTextPrimary" />
                 </FrameLayout>
 
                 <TextView
                     style="@style/SettingsRowLabel"
+                    android:textColor="?attr/appTextPrimary"
                     android:text="Uygulama Hakkında" />
 
                 <TextView
@@ -211,10 +219,10 @@
                     android:layout_height="wrap_content"
                     android:text="v1.0.0"
                     android:textSize="13sp"
-                    android:textColor="#415A77" />
+                    android:textColor="?attr/appTextMuted" />
             </LinearLayout>
 
-            <!-- Çıkış Yap butonu: Genişlik ve boşluklar optimize edildi -->
+            <!-- Çıkış Yap butonu -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLogout"
                 android:layout_width="match_parent"
@@ -226,16 +234,17 @@
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:textAllCaps="false"
-                android:backgroundTint="#1B263B"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
+                app:backgroundTint="@null"
+                android:background="?attr/appLogoutDrawable"
                 app:cornerRadius="16dp"
                 app:icon="@drawable/logout_icon"
                 app:iconGravity="textStart"
                 app:iconPadding="8dp"
                 app:iconSize="20dp"
                 app:iconTint="#FFFFFF"
-                app:rippleColor="#406998C5" />
+                app:rippleColor="?attr/appAccent" />
 
         </LinearLayout>
 

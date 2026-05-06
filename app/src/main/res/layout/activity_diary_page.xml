@@ -6,7 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="?attr/appSurface">
 
     <!-- Geri butonu -->
     <ImageButton
@@ -22,7 +22,7 @@
         android:src="@drawable/arrow_back_icon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="#1B263B" />
+        app:tint="?attr/appTextPrimary" />
 
     <!-- Kaydet butonu -->
     <ImageButton
@@ -32,13 +32,13 @@
         android:layout_marginEnd="12dp"
         android:padding="12dp"
         android:scaleType="fitCenter"
-        android:background="@drawable/bg_save_circle"
+        android:background="?attr/appAccentButtonDrawable"
         android:contentDescription="Kaydet"
         android:src="@drawable/check_icon"
         app:layout_constraintBottom_toBottomOf="@id/btnBack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/btnBack"
-        app:tint="#FFFFFF" />
+        app:tint="?attr/appAccentText" />
 
     <!-- Sil butonu -->
     <ImageButton
@@ -53,7 +53,7 @@
         app:layout_constraintBottom_toBottomOf="@id/btnSave"
         app:layout_constraintEnd_toStartOf="@id/btnSave"
         app:layout_constraintTop_toTopOf="@id/btnSave"
-        app:tint="#415A77" />
+        app:tint="?attr/appIconMuted" />
 
     <!-- Favori butonu -->
     <ImageButton
@@ -68,7 +68,7 @@
         app:layout_constraintBottom_toBottomOf="@id/btnDelete"
         app:layout_constraintEnd_toStartOf="@id/btnDelete"
         app:layout_constraintTop_toTopOf="@id/btnDelete"
-        app:tint="#415A77" />
+        app:tint="?attr/appIconMuted" />
 
     <!-- Tarih -->
     <TextView
@@ -77,14 +77,14 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="30 Nisan 2026"
-        android:textColor="#415A77"
+        android:textColor="?attr/appTextMuted"
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@id/btnBack"
         app:layout_constraintEnd_toStartOf="@id/btnFavorite"
         app:layout_constraintStart_toEndOf="@id/btnBack"
         app:layout_constraintTop_toTopOf="@id/btnBack" />
 
-    <!-- Başlık: Kırmızı hatayı (minHeight) ve uyarıyı (ignore) çözdüm -->
+    <!-- Başlık -->
     <EditText
         android:id="@+id/etTitle"
         android:layout_width="0dp"
@@ -97,8 +97,8 @@
         android:hint="Başlık"
         android:importantForAutofill="no"
         android:inputType="text"
-        android:textColor="#1B263B"
-        android:textColorHint="#80415A77"
+        android:textColor="?attr/appTextPrimary"
+        android:textColorHint="?attr/appTextMuted"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -113,12 +113,12 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="12dp"
-        android:background="#336998C5"
+        android:background="?attr/appDivider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etTitle" />
 
-    <!-- İçerik Alanı: Genişlik uyarısını ignore ile çözdüm -->
+    <!-- İçerik Alanı -->
     <EditText
         android:id="@+id/etContent"
         android:layout_width="0dp"
@@ -131,10 +131,10 @@
         android:gravity="top|start"
         android:hint="Bugün neler oldu? Düşüncelerini buraya yaz..."
         android:importantForAutofill="no"
-        android:inputType="textMultiLine|textCapSentences"
+        android:inputType="textCapSentences|textMultiLine"
         android:lineSpacingMultiplier="1.2"
-        android:textColor="#415A77"
-        android:textColorHint="#80415A77"
+        android:textColor="?attr/appTextMuted"
+        android:textColorHint="?attr/appTextMuted"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

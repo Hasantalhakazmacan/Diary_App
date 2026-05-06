@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -15,8 +16,9 @@ import java.util.Locale
 
 class DiaryPage : AppCompatActivity() {
 
-    // Sınıf düzeyinde değişken, böylece tıklama olaylarında durumu korur
     private var isFavorite = false
+    private var noteId: Int = -1   // -1 = yeni not, >0 = düzenleme
+    private lateinit var dbHelper: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,71 +31,100 @@ class DiaryPage : AppCompatActivity() {
             insets
         }
 
-        // Bileşenleri tanımlıyoruz
+        dbHelper = DatabaseHelper(this)
+
         val btnBack = findViewById<ImageButton>(R.id.btnBack)
         val btnSave = findViewById<ImageButton>(R.id.btnSave)
         val btnFavorite = findViewById<ImageButton>(R.id.btnFavorite)
+        val btnDelete = findViewById<ImageButton>(R.id.btnDelete)
         val tvDate = findViewById<TextView>(R.id.tvDate)
         val etTitle = findViewById<EditText>(R.id.etTitle)
         val etContent = findViewById<EditText>(R.id.etContent)
 
-        // 1. ADIM: Varsayılan Tarihi Ayarla (Yeni kayıt için)
         val dateFormat = SimpleDateFormat("dd MMMM yyyy", Locale("tr", "TR"))
         tvDate.text = dateFormat.format(Date())
 
-        // 2. ADIM: ViewsPage'den (Düzenleme için) gelen verileri kontrol et
-        val editTitle = intent.getStringExtra("EXTRA_TITLE")
-        val editContent = intent.getStringExtra("EXTRA_CONTENT")
-        val editDate = intent.getStringExtra("EXTRA_DATE")
-        // Favori durumunu al, veri yoksa false kabul et
-        val editFavorite = intent.getBooleanExtra("EXTRA_IS_FAVORITE", false)
+        // Düzenleme modu — MainPage'den note_id geldiyse DB'den notu yükle
+        noteId = intent.getIntExtra("note_id", -1)
+        if (noteId != -1) {
+            val note = dbHelper.getNoteById(noteId)
+            if (note != null) {
+                etTitle.setText(note.title)
+                etContent.setText(note.content)
+                tvDate.text = note.date
+                isFavorite = note.isFavorite
+            }
+        } else {
+            // Eski Intent extra desteğiyle uyumluluk
+            intent.getStringExtra("EXTRA_TITLE")?.let { etTitle.setText(it) }
+            intent.getStringExtra("EXTRA_CONTENT")?.let { etContent.setText(it) }
+            intent.getStringExtra("EXTRA_DATE")?.let { tvDate.text = it }
+            isFavorite = intent.getBooleanExtra("EXTRA_IS_FAVORITE", false)
+        }
 
-        // Eğer veriler boş değilse (Düzenleme Modu), bileşenlere yerleştir
-        if (editTitle != null) {
-            etTitle.setText(editTitle)
-        }
-        if (editContent != null) {
-            etContent.setText(editContent)
-        }
-        if (editDate != null) {
-            tvDate.text = editDate // Eski tarihi koru
-        }
-
-        // Favori durumunu ve ikonunu eşitle
-        isFavorite = editFavorite
         updateFavoriteIcon(btnFavorite)
 
-        // GERİ BUTONU: Ana sayfaya döner
+        // GERİ
         btnBack.setOnClickListener {
-            val intent = Intent(this, MainPage::class.java)
-            startActivity(intent)
             finish()
         }
 
-        // KAYDET BUTONU: Verileri paketleyip ViewsPage'e gönderir
+        // KAYDET — DB'ye yaz, sonra görüntüleme sayfasına geç
         btnSave.setOnClickListener {
-            val titleText = etTitle.text.toString()
-            val contentText = etContent.text.toString()
+            val titleText = etTitle.text.toString().trim()
+            val contentText = etContent.text.toString().trim()
             val dateText = tvDate.text.toString()
 
-            val intent = Intent(this, ViewsPage::class.java)
+            if (titleText.isEmpty() && contentText.isEmpty()) {
+                Toast.makeText(this, "Boş not kaydedilemez", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
-            intent.putExtra("EXTRA_TITLE", titleText)
-            intent.putExtra("EXTRA_CONTENT", contentText)
-            intent.putExtra("EXTRA_IS_FAVORITE", isFavorite)
-            intent.putExtra("EXTRA_DATE", dateText)
+            val savedId: Int = if (noteId == -1) {
+                // Yeni not ekle
+                val newId = dbHelper.insertNote(titleText, contentText, dateText)
+                if (newId == -1L) {
+                    Toast.makeText(this, "Kaydetme başarısız", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                dbHelper.setFavorite(newId.toInt(), isFavorite)
+                newId.toInt()
+            } else {
+                // Mevcut notu güncelle
+                dbHelper.updateNote(noteId, titleText, contentText, dateText)
+                dbHelper.setFavorite(noteId, isFavorite)
+                noteId
+            }
 
-            startActivity(intent)
+            Toast.makeText(this, "Kaydedildi", Toast.LENGTH_SHORT).show()
+
+            // ViewsPage'e geçiş
+            val viewIntent = Intent(this, ViewsPage::class.java)
+            viewIntent.putExtra("note_id", savedId)
+            viewIntent.putExtra("EXTRA_TITLE", titleText)
+            viewIntent.putExtra("EXTRA_CONTENT", contentText)
+            viewIntent.putExtra("EXTRA_DATE", dateText)
+            viewIntent.putExtra("EXTRA_IS_FAVORITE", isFavorite)
+            startActivity(viewIntent)
+            finish()
         }
 
-        // FAVORİ BUTONU: Durumu değiştirir ve görseli günceller
+        // SİL — sadece düzenleme modunda anlamlı
+        btnDelete.setOnClickListener {
+            if (noteId != -1) {
+                dbHelper.deleteNote(noteId)
+                Toast.makeText(this, "Silindi", Toast.LENGTH_SHORT).show()
+            }
+            finish()
+        }
+
+        // FAVORİ
         btnFavorite.setOnClickListener {
             isFavorite = !isFavorite
             updateFavoriteIcon(btnFavorite)
         }
     }
 
-    // İkon güncellemeyi merkezi bir fonksiyon yaptım, kod tekrarını önler
     private fun updateFavoriteIcon(btn: ImageButton) {
         if (isFavorite) {
             btn.setImageResource(R.drawable.heart_filled_icon)

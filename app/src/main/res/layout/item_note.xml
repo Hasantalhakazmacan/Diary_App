@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
     android:padding="16dp"
-    android:background="@drawable/bg_note_card"
+    android:background="?attr/appCardDrawable"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackground">
@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:text="30 Nisan 2026"
         android:textSize="11sp"
-        android:textColor="#415A77"
+        android:textColor="?attr/appTextMuted"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,7 +27,7 @@
         android:layout_height="14dp"
         android:src="@drawable/heart_icon"
         android:visibility="gone"
-        app:tint="#6998C5"
+        app:tint="?attr/appAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tvItemDate"
         app:layout_constraintBottom_toBottomOf="@id/tvItemDate" />
@@ -40,7 +40,7 @@
         android:text="Bugünün Notu"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:textColor="#1B263B"
+        android:textColor="?attr/appTextPrimary"
         android:maxLines="1"
         android:ellipsize="end"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:textSize="13sp"
-        android:textColor="#415A77"
+        android:textColor="?attr/appTextMuted"
         android:maxLines="2"
         android:ellipsize="end"
         app:layout_constraintStart_toStartOf="parent"

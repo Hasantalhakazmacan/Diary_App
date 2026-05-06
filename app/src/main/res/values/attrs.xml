@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Renkler -->
+    <attr name="appOuterBg" format="color|reference" />
+    <attr name="appSurface" format="color|reference" />
+    <attr name="appSurfaceMuted" format="color|reference" />
+    <attr name="appTextPrimary" format="color|reference" />
+    <attr name="appTextMuted" format="color|reference" />
+    <attr name="appAccent" format="color|reference" />
+    <attr name="appAccentText" format="color|reference" />
+    <attr name="appIconMuted" format="color|reference" />
+    <attr name="appCardBg" format="color|reference" />
+    <attr name="appCardBorder" format="color|reference" />
+    <attr name="appDivider" format="color|reference" />
+    <attr name="appFrameBorder" format="color|reference" />
+    <attr name="appHomeIndicator" format="color|reference" />
+    <attr name="appHintColor" format="color|reference" />
+    <attr name="appRipple" format="color|reference" />
+
+    <!-- Accent gradient renkleri -->
+    <attr name="appAccentGradStart" format="color|reference" />
+    <attr name="appAccentGradMid" format="color|reference" />
+    <attr name="appAccentGradEnd" format="color|reference" />
+
+    <!-- Drawable referansları -->
+    <attr name="appOuterDrawable" format="reference" />
+    <attr name="appSurfaceDrawable" format="reference" />
+    <attr name="appCardDrawable" format="reference" />
+    <attr name="appAccentButtonDrawable" format="reference" />
+    <attr name="appLogoutDrawable" format="reference" />
+</resources>

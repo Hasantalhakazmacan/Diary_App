@@ -6,7 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="?attr/appSurface">
 
     <!-- Tarih -->
     <TextView
@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="30 Nisan 2026"
-        android:textColor="#415A77"
+        android:textColor="?attr/appTextMuted"
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@id/btnBack"
         app:layout_constraintEnd_toStartOf="@id/btnFavorite"
@@ -37,7 +37,7 @@
         app:layout_constraintBottom_toBottomOf="@id/btnEdit"
         app:layout_constraintEnd_toStartOf="@id/btnEdit"
         app:layout_constraintTop_toTopOf="@id/btnEdit"
-        app:tint="#415A77" />
+        app:tint="?attr/appIconMuted" />
 
     <!-- Düzenle butonu -->
     <ImageButton
@@ -45,7 +45,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginEnd="12dp"
-        android:background="@drawable/bg_edit_circle"
+        android:background="?attr/appAccentButtonDrawable"
         android:contentDescription="Düzenle"
         android:padding="12dp"
         android:scaleType="fitCenter"
@@ -53,7 +53,7 @@
         app:layout_constraintBottom_toBottomOf="@id/btnBack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/btnBack"
-        app:tint="#FFFFFF" />
+        app:tint="?attr/appAccentText" />
 
     <!-- Geri butonu -->
     <ImageButton
@@ -69,7 +69,7 @@
         android:src="@drawable/arrow_back_icon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="#1B263B" />
+        app:tint="?attr/appTextPrimary" />
 
     <!-- Başlık -->
     <TextView
@@ -82,7 +82,7 @@
         android:text="Bugünün Notu"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="#1B263B"
+        android:textColor="?attr/appTextPrimary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnBack" />
@@ -108,7 +108,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Bugün harika bir gün geçirdim..."
-            android:textColor="#415A77"
+            android:textColor="?attr/appTextMuted"
             android:lineSpacingMultiplier="1.4"
             android:textSize="16sp" />
 

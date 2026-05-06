@@ -1,9 +1,36 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.Diary_calisma" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
-        <item name="android:windowBackground">#FFFFFF</item>
-        <item name="android:statusBarColor">#FFFFFF</item>
+    <style name="Base.Theme.GunlukApp" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Renkler -->
+        <item name="appOuterBg">@color/dark_outerBg</item>
+        <item name="appSurface">@color/dark_surface</item>
+        <item name="appSurfaceMuted">@color/dark_surfaceMuted</item>
+        <item name="appTextPrimary">@color/dark_textPrimary</item>
+        <item name="appTextMuted">@color/dark_textMuted</item>
+        <item name="appAccent">@color/dark_accent</item>
+        <item name="appAccentText">@color/dark_accentText</item>
+        <item name="appIconMuted">@color/dark_iconMuted</item>
+        <item name="appCardBg">@color/dark_cardBg</item>
+        <item name="appCardBorder">@color/dark_cardBorder</item>
+        <item name="appDivider">@color/dark_divider</item>
+        <item name="appFrameBorder">@color/dark_frameBorder</item>
+        <item name="appHomeIndicator">@color/dark_homeIndicator</item>
+        <item name="appAccentGradStart">@color/dark_accentGradStart</item>
+        <item name="appAccentGradMid">@color/dark_accentGradMid</item>
+        <item name="appAccentGradEnd">@color/dark_accentGradEnd</item>
+
+        <!-- Drawable'lar -->
+        <item name="appOuterDrawable">@drawable/bg_outer_dark</item>
+        <item name="appSurfaceDrawable">@drawable/bg_surface_dark</item>
+        <item name="appCardDrawable">@drawable/bg_note_card_dark</item>
+        <item name="appAccentButtonDrawable">@drawable/bg_accent_button_dark</item>
+        <item name="appLogoutDrawable">@drawable/bg_logout_dark</item>
+
+        <!-- Sistem çubukları -->
+        <item name="android:statusBarColor">@color/dark_surface</item>
+        <item name="android:navigationBarColor">@color/dark_surface</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
     </style>
+
+    <style name="Theme.GunlukApp" parent="Base.Theme.GunlukApp" />
 </resources>

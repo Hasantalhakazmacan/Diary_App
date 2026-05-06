@@ -1,6 +1,5 @@
 package com.hasantalhakazmacan.diary_calisma
 
-import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -10,14 +9,13 @@ import com.hasantalhakazmacan.diary_calisma.databinding.ActivityRegisterBinding
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
-    private lateinit var dbHelper: DatabaseHelper // Veritabanı yardımcımızı tanımlıyoruz
+    private lateinit var dbHelper: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // DatabaseHelper nesnesini başlatıyoruz
         dbHelper = DatabaseHelper(this)
 
         // Kayıt Ol Butonu
@@ -29,6 +27,7 @@ class RegisterActivity : AppCompatActivity() {
         binding.btnGoToLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 
@@ -37,39 +36,40 @@ class RegisterActivity : AppCompatActivity() {
         val email = binding.editTextEmail.text.toString().trim()
         val password = binding.editText2.text.toString().trim()
 
-        // Alanların boş olup olmadığını kontrol ediyoruz
+        // Alanların boş olup olmadığını kontrol et
         if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Lütfen tüm alanları doldurun", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // E-mail formatı kontrolü
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(this, "Geçerli bir e-mail adresi girin", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Şifre uzunluğu kontrolü
+        if (password.length < 4) {
+            Toast.makeText(this, "Şifre en az 4 karakter olmalı", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // E-mail zaten kayıtlı mı?
+        if (dbHelper.isEmailRegistered(email)) {
+            Toast.makeText(this, "Bu e-mail ile zaten bir hesap var", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        // Kullanıcıyı ekle
+        val result = dbHelper.insertUser(username, email, password)
+
+        if (result != -1L) {
+            Toast.makeText(this, "Kayıt işlemi başarılı!", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
         } else {
-            // Veritabanını "Yazılabilir" modda açıyoruz
-            val db = dbHelper.writableDatabase
-
-            // Eklenecek verileri ContentValues ile paketliyoruz
-            val values = ContentValues().apply {
-                put(DatabaseHelper.COLUMN_USERNAME, username)
-                put(DatabaseHelper.COLUMN_EMAIL, email)
-                put(DatabaseHelper.COLUMN_PASSWORD, password)
-            }
-
-            // Verileri 'users' tablosuna ekliyoruz.
-            val result = db.insert(DatabaseHelper.TABLE_USERS, null, values)
-
-            if (result != -1L) {
-                // Kayıt başarılı oldu
-                Toast.makeText(this, "Kayıt işlemi başarılı!", Toast.LENGTH_SHORT).show()
-
-                // Başarılı kayıttan sonra otomatik olarak Login ekranına yönlendir
-                val intent = Intent(this, LoginActivity::class.java)
-                startActivity(intent)
-                finish() // Kullanıcı geri tuşuna basınca tekrar kayıt ekranına dönmesin
-            } else {
-                // Kayıt sırasında bir hata oluştu
-                Toast.makeText(this, "Kayıt başarısız oldu. Lütfen tekrar deneyin.", Toast.LENGTH_SHORT).show()
-            }
-
-            // DİKKAT: Geliştirme aşamasında Database Inspector'ı izleyebilmek için
-            // close() işlemini geçici olarak kapattık (yorum satırı yaptık).
-            // db.close()
+            Toast.makeText(this, "Kayıt başarısız oldu. Lütfen tekrar deneyin.", Toast.LENGTH_SHORT).show()
         }
     }
 }
